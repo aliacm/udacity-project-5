@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Test</title>
+    </head>
+
+    <body>
+
+        <header>
+            <div class="">
+                >:D 
+            </div>
+            <div class="">
+                there is nowhere to go...
+            </div>
+        </header>
+
+        <main>
+            <section>
+                <form class="" onsubmit="return Main.handleSubmit(event)">
+                    <input id="input" type="text" name="input" value="" placeholder="insert dem feels here">
+                    <input id = "button" type="submit" name="" value="submit" onclick="return Main.handleSubmit(event)" onsubmit="return Main.handleSubmit(event)">
+                </form>
+            <section>
+
+            <section>
+                <strong>Form Results:</strong>
+                <div id="results">
+                    <div id="yesresults">
+                        <p id="score"></p>
+                        <p id="agreement"></p>
+                        <p id="subjectivity"></p>
+                        <p id="confidence"></p>
+                        <p id="irony"></p>
+                    </div>
+                    <div id="noresults">
+                        <p>No input provided.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Copyright Norman L. Pates (NLP)</p>
+        </footer>
+        <script>
+            // Check that service workers are supported
+            if ('serviceWorker' in navigator) {
+                // Use the window load event to keep the page load performant
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js');
+                });
+            }
+        </script>
+    </body>
+</html>
