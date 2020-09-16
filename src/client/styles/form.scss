@@ -4,6 +4,11 @@ form {
     padding: 40px;
 }
 
+.inputArea {
+    background-color: white;
+    border-radius: 20px;
+}
+
 input {
     padding: 5px 20px;
     width: 100%;
@@ -14,4 +19,8 @@ input {
 
 #button {
     background: yellow;
+}
+
+#button:hover {
+    box-shadow: 0 4px 8px 0 black;
 }

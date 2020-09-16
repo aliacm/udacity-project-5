@@ -2,7 +2,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: #b1e9ff;
+    background: #111516;
+    color: white;
 }
 
 main {
@@ -13,3 +14,11 @@ section {
     max-width: 800px;
     margin: 50px auto;
 }
+
+#title {
+    font-size: x-large;
+    display: flex;
+    justify-content: center;
+}
+
+

@@ -2,49 +2,42 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>Test</title>
+        <title>Risky Travel</title>
     </head>
 
     <body>
 
         <header>
             <div class="">
-                >:D 
+                Risky Travel 
             </div>
             <div class="">
-                there is nowhere to go...
+                navigation
             </div>
         </header>
-
+        <div>
+            <h1 id="title">Whereth Doeth You Goeth (and Wheneth)?</h1>
+        </div>
         <main>
             <section>
-                <form class="" onsubmit="return Main.handleSubmit(event)">
-                    <input id="input" type="text" name="input" value="" placeholder="insert dem feels here">
-                    <input id = "button" type="submit" name="" value="submit" onclick="return Main.handleSubmit(event)" onsubmit="return Main.handleSubmit(event)">
+                <form class="inputArea" onsubmit="return Main.handleSubmit(event)">
+                    <input id="inputPlace" type="text" name="input" value="" placeholder="whereth?">
+                    <input id="inputTime" type="text" name="input" value="" placeholder="wheneth?">
+                    <input id = "button" type="submit" name="" value="yes pls tell me" onclick="return Main.handleSubmit(event)" onsubmit="return Main.handleSubmit(event)">
                 </form>
             <section>
 
             <section>
                 <strong>Form Results:</strong>
                 <div id="results">
-                    <div id="yesresults">
-                        <p id="score"></p>
-                        <p id="agreement"></p>
-                        <p id="subjectivity"></p>
-                        <p id="confidence"></p>
-                        <p id="irony"></p>
-                    </div>
-                    <div id="noresults">
-                        <p>No input provided.</p>
-                    </div>
                 </div>
             </section>
         </main>
 
         <footer>
-            <p>Copyright Norman L. Pates (NLP)</p>
+            <p>Weird weather we're having, eh?</p>
         </footer>
-        <script>
+        <!-- <script>
             // Check that service workers are supported
             if ('serviceWorker' in navigator) {
                 // Use the window load event to keep the page load performant
@@ -52,6 +45,6 @@
                     navigator.serviceWorker.register('/service-worker.js');
                 });
             }
-        </script>
+        </script> -->
     </body>
 </html>
