@@ -1,5 +1,5 @@
 const supertest = require('supertest')
-const app = require('../src/server/index.js')
+const app = require('../src/server')
 const request = supertest(app)
 
 it('Gets the test endpoint', async done => {
