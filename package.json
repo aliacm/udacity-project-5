@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watch",
     "prestart": "babel src/server --out-dir dist-server",
     "start": "node dist-server/index.js",
     "build-prod": "webpack --config webpack.prod.js",
@@ -20,6 +21,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "node-fetch": "^2.6.1",
+    "sequelize": "^6.3.5",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   },
@@ -30,6 +32,7 @@
     "babel-jest": "^26.3.0",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.2",
     "css-loader": "^4.3.0",
     "eslint": "^7.9.0",
     "eslint-plugin-jest": "^24.0.1",
@@ -40,9 +43,17 @@
     "nodemon": "^2.0.4",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "sass-loader": "^10.0.2",
+    "sequelize-cli": "^6.2.0",
     "style-loader": "^1.2.1",
+    "supertest": "^4.0.2",
     "terser-webpack-plugin": "^4.2.1",
     "webpack-dev-server": "^3.11.0",
     "workbox-webpack-plugin": "^5.1.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }

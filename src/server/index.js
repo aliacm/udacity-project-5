@@ -126,4 +126,4 @@ app.post('/getImage', async (req, res) => {
     
 })
 
-
+module.exports = app
