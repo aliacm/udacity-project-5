@@ -24,6 +24,8 @@ app.use(express.static('dist'))
 
 console.log(__dirname)
 
+let projectData = {temp: '', weatherConds: ''}
+
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
     // res.sendFile(resolve('src/client/views/index.html'))
@@ -88,10 +90,11 @@ app.post('/getWeather', async (req, res) => {
                 'Content-Type': 'application/json'
             }
         })
-        // const textData = await response.text()
-        // console.log(`textData: ${textData}`)
         const data = await response.json()
         res.send(data)
+        const numDaysOut            = req.body.numDaysOut
+        projectData['temp']         = data.data[numDaysOut].temp
+        projectData['weatherConds'] = data.data[numDaysOut].weather.description
     }
     catch(error) {
         console.log("error", error)
@@ -114,8 +117,6 @@ app.post('/getImage', async (req, res) => {
                 'Content-Type': 'application/json'
             }
         })
-        //const textData = await response.text()
-        //console.log(`textData: ${textData}`)
         const data = await response.json()
         res.send(data)
     }

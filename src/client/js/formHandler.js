@@ -24,7 +24,7 @@ async function handleSubmit(event) {
     const numDaysOut = Main.getNumDaysOut(inputDate)
     let current = false
     if (numDaysOut == 0) {current = true}
-    console.log(`numDaysOut: ${numDaysOut}, current: ${current}, lat: ${lat}, lon: ${lon}`)
+    console.log(`numDaysOut: ${numDaysOut}, current: ${current}, lat: ${lat}, lon: ${lon}, numDaysOut: ${numDaysOut}`)
     // ----------- WEATHERBIT -------------
     // Post numDaysOut, current, lat, and lon to /getWeather, and get back weather.
     const response2 = await fetch('/getWeather', {
@@ -32,7 +32,7 @@ async function handleSubmit(event) {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({current: current, lat: lat, lon: lon})
+        body: JSON.stringify({current: current, lat: lat, lon: lon, numDaysOut: numDaysOut})
     })
     const dataWeather    = await response2.json()
     const tempCelsius    = dataWeather.data[numDaysOut].temp
@@ -48,9 +48,9 @@ async function handleSubmit(event) {
         body: JSON.stringify({place: inputCity, keyword:'city'})
     })
     let image = await response3.json()
+    // If no image of city, fetch image of region
     if (image.total == 0) {
         console.log(`Image of ${inputCity} not found, searching for image of ${region}`)
-        // fetch image of country
         const response4 = await fetch('/getImage', {
             method: "POST",
             headers: {
@@ -60,6 +60,7 @@ async function handleSubmit(event) {
         })
         image = await response4.json()
     }
+    // If still no image, give up
     if (image.total == 0) {
         console.log(`No images of ${inputCountry} or ${region} were found.`)
         return
