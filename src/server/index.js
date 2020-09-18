@@ -59,6 +59,8 @@ app.post('/getCoords', async (req, res) => {
             },
             body: JSON.stringify({})
         })
+        //const textdata = await response.text()
+        //console.log(`geonames text: ${textdata}`)
         const data = await response.json()
         res.send(data)
     }
@@ -97,14 +99,14 @@ app.post('/getWeather', async (req, res) => {
 })
 
 // image api
-function getPixabayUrl(city) {
-    return `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${city}+city&image_type=photo`
+function getPixabayUrl(place, keyword) {
+    return `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${place}+${keyword}+travel&image_type=photo`
 }
 
 // send location to pixabay, send image in response
 app.post('/getImage', async (req, res) => {
     try {
-        const url = getPixabayUrl(req.body.city)
+        const url = getPixabayUrl(req.body.place, req.body.keyword)
         console.log(`Accessing ${url}...`)
         const response = await fetch(url, {
             method: 'GET',
@@ -123,5 +125,4 @@ app.post('/getImage', async (req, res) => {
     
 })
 
-//const PORT = process.env.PORT || 3000;
-//app.listen(PORT, () => console.log(`listening on ${PORT}`));
+
