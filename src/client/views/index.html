@@ -16,20 +16,24 @@
             </div>
         </header>
         <div>
-            <h1 id="title">Whereth Doeth You Goeth (and Wheneth)?</h1>
+            <h1 id="title">Not All Who Wander Are Lost (Except Me)</h1>
         </div>
         <main>
             <section>
                 <form class="inputArea" onsubmit="return Main.handleSubmit(event)">
-                    <input id="inputPlace" type="text" name="input" value="" placeholder="whereth?">
-                    <input id="inputTime" type="text" name="input" value="" placeholder="wheneth?">
-                    <input id = "button" type="submit" name="" value="yes pls tell me" onclick="return Main.handleSubmit(event)" onsubmit="return Main.handleSubmit(event)">
+                    <input id="inputCity" type="text" name="input" value="" placeholder="city">
+                    <input id="inputPostalCode" type="text" name="input" value="" placeholder="postal code (many cities share names)">
+                    <input id="inputCountry" type="text" name="input" value="" placeholder="country code (ex: us)">
+                    <input id="inputDate" type="text" name="input" value="" placeholder="date (MM-DD-YYYY)">
+                    <input id="button" type="submit" name="" value="yes pls tell me" onclick="return Main.handleSubmit(event)" onsubmit="return Main.handleSubmit(event)">
                 </form>
             <section>
 
             <section>
                 <strong>Form Results:</strong>
                 <div id="results">
+                    <p id="weather"></p>
+                    <img id="image">
                 </div>
             </section>
         </main>

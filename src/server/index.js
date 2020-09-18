@@ -13,6 +13,11 @@ app.use(json());
 // Cors for cross origin allowance
 app.use(cors());
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
+
 config()
 
 app.use(express.static('dist'))
@@ -33,17 +38,22 @@ app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
 
-const API_KEY = process.env.API_KEY
-function getUrl(inputText, inputType) {
-    return `https://api.meaningcloud.com/sentiment-2.1?${inputType}=${inputText}&lang=en&key=${API_KEY}`
+const WEATHER_BIT_API_KEY = process.env.WEATHER_BIT_API_KEY
+const GEONAMES_USERID = process.env.GEONAMES_USERID
+const PIXABAY_API_KEY = process.env.PIXABAY_API_KEY
+
+// coords api
+function getGeonamesUrl(postalcode, country) {
+    return `http://api.geonames.org/postalCodeSearchJSON?postalcode=${postalcode}&country=${country}&username=${GEONAMES_USERID}`
 }
 
-app.post('/getfeels', async (req, res) => {
+// send postalcode & country to geonames, send coords in response
+app.post('/getCoords', async (req, res) => {
     try {
-        const url = getUrl(req.body.feels, req.body.type)
+        const url = getGeonamesUrl(req.body.postalcode, req.body.country)
         console.log(`Accessing ${url}...`)
         const response = await fetch(url, {
-            method: 'POST',
+            method: 'POST', 
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -57,5 +67,61 @@ app.post('/getfeels', async (req, res) => {
     }
 })
 
+// weather api
+function getWeatherBitUrl(current, lat, lon) {
+    return `http://api.weatherbit.io/v2.0/${current ? 'current?' : 'forecast/daily?'}lang=en&lat=${lat}&lon=${lon}&key=${WEATHER_BIT_API_KEY}`
+}
 
+// send coords to weatherbit, send weather in response
+app.post('/getWeather', async (req, res) => {
+    try {
+        const url = getWeatherBitUrl(
+            req.body.current, 
+            req.body.lat, 
+            req.body.lon)
+        console.log(`Accessing ${url}...`)
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        // const textData = await response.text()
+        // console.log(`textData: ${textData}`)
+        const data = await response.json()
+        res.send(data)
+    }
+    catch(error) {
+        console.log("error", error)
+    }
+})
 
+// image api
+function getPixabayUrl(city) {
+    return `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${city}+city&image_type=photo`
+}
+
+// send location to pixabay, send image in response
+app.post('/getImage', async (req, res) => {
+    try {
+        const url = getPixabayUrl(req.body.city)
+        console.log(`Accessing ${url}...`)
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        //const textData = await response.text()
+        //console.log(`textData: ${textData}`)
+        const data = await response.json()
+        res.send(data)
+    }
+    catch(error) {
+        console.log("error", error)
+    }
+    
+})
+
+//const PORT = process.env.PORT || 3000;
+//app.listen(PORT, () => console.log(`listening on ${PORT}`));

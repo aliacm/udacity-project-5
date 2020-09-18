@@ -1,4 +1,5 @@
-# Adequate Readme
+# Setup
+To avoid the CORS issue, ensure that cors is installed.
 
-This is a readme. It describes the project, which takes user input and sentimentally analyzes it and displays it on the screen. Also, webpack. Also, other things.
-Thanks for coming to my TED talk.
+To begin, run <code>npm run build-prod</code>, then <code>npm start</code>.
+
