@@ -1,7 +1,7 @@
-import express from 'express'
-import mockAPIResponse from './mockAPI.js'
-import fetch from 'node-fetch'
-import { config } from 'dotenv'
+import express from "express"
+import mockAPIResponse from "./mockAPI.js"
+import fetch from "node-fetch"
+import { config } from "dotenv"
 import { urlencoded, json } from "body-parser"
 import cors from "cors"
 
@@ -24,7 +24,7 @@ app.use(express.static('dist'))
 
 console.log(__dirname)
 
-let projectData = {temp: '', weatherConds: ''}
+let projectData = {lat: '', lon: '', temp: '', weatherConds: ''}
 
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
@@ -65,6 +65,8 @@ app.post('/getCoords', async (req, res) => {
         //console.log(`geonames text: ${textdata}`)
         const data = await response.json()
         res.send(data)
+        projectData['lat'] = data.postalCodes[0].lat
+        projectData['lon'] = data.postalCodes[0].lng
     }
     catch(error) {
         console.log("error", error)
@@ -95,6 +97,10 @@ app.post('/getWeather', async (req, res) => {
         const numDaysOut            = req.body.numDaysOut
         projectData['temp']         = data.data[numDaysOut].temp
         projectData['weatherConds'] = data.data[numDaysOut].weather.description
+        console.log('project data')
+        console.log(projectData['temp'])
+        console.log(projectData['lat'])
+        console.log(projectData['weatherConds'])
     }
     catch(error) {
         console.log("error", error)
@@ -122,8 +128,7 @@ app.post('/getImage', async (req, res) => {
     }
     catch(error) {
         console.log("error", error)
-    }
-    
+    }   
 })
 
 module.exports = app
